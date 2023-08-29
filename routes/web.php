@@ -35,5 +35,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
     Route::get('/add-product',[ProductController::class,'addProduct'])->name('addProduct');
     Route::post('/add',[ProductController::class,'addNewProduct'])->name('add');
+
+    Route::get('/view-product/{id}',[ProductController::class,'viewProduct'])->name('viewProduct');
+    Route::get('/delete-product/{id}',[ProductController::class,'deleteProduct'])->name('deleteProduct');
 });
 

@@ -13,7 +13,9 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">View product</th>
                     <th scope="col">Action</th>
+
 
                   </tr>
                 </thead>
@@ -25,8 +27,10 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->amount}}</td>
+                            <td><a href="{{route('viewProduct',['id'=>$product->id])}}" class="badge badge-primary badge-sm">View product</a></td>
+
                             <td>
-                                <a href="" class="badge badge-danger badge-sm">Obrisi</a>
+                                <a href="{{route('deleteProduct',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
                                 <a href="" class="badge badge-warning badge-sm">Edituj</a>
 
                             </td>
