@@ -11,4 +11,8 @@ class ProductController extends Controller
         $allProducts = ProductModel::all();
         return view('/welcome',compact('allProducts'));
     }
+
+    public function addProduct(){
+        return view('products.addView');
+    }
 }
