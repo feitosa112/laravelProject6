@@ -34,6 +34,6 @@ Route::get('/',[ProductController::class,"allProducts"])->name('shop');
 Route::middleware('auth')->prefix('admin')->group(function(){
 
     Route::get('/add-product',[ProductController::class,'addProduct'])->name('addProduct');
-
+    Route::post('/add',[ProductController::class,'addNewProduct'])->name('add');
 });
 
