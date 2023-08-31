@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
@@ -38,5 +39,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
     Route::get('/view-product/{id}',[ProductController::class,'viewProduct'])->name('viewProduct');
     Route::get('/delete-product/{id}',[ProductController::class,'deleteProduct'])->name('deleteProduct');
+
+    Route::get('contact-us',[ContactController::class,'showContactForm'])->name('contactView');
+    Route::post('send-msg',[ContactController::class,'sendMsg'])->name('sendMsg');
 });
 
