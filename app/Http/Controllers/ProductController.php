@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -30,7 +32,8 @@ class ProductController extends Controller
             'name'=>$request->get('name'),
             'price'=>$request->get('price'),
             'amount'=>$request->get('amount'),
-            'description'=>$request->get('description')
+            'description'=>$request->get('description'),
+            'userID'=>Auth::user()->id
 
         ]);
 
@@ -50,5 +53,30 @@ class ProductController extends Controller
             $product->delete();
         }
         return redirect()->back()->with('deleteProduct','Product deleted!!');
+    }
+
+    public function showEditForm($id){
+        $product = ProductModel::find($id);
+        return view('products.edit-view',compact('product'));
+
+    }
+
+    public function updateProduct(Request $request,$id){
+        $name = $request->name;
+        $price = $request->price;
+        $amount = $request->amount;
+        $description = $request->description;
+        $id = $request->id;
+        $userID = Auth::user()->id;
+
+        $request->validate([
+            'name'=>'required|string',
+            'price'=>'required|numeric',
+            'amount'=>'required|numeric',
+            'description'=>'required|string'
+        ]);
+
+        DB::update('UPDATE product SET name= :name,price= :price,amount= :amount,description= :description,userID= :userID WHERE id= :id',['id' => $id,'name' => $name, 'price' => $price, 'amount' => $amount, 'description' => $description, 'userID' => $userID]);
+        return redirect(route('shop'))->with('update','You have successfully edited the product!');
     }
 }

@@ -30,9 +30,11 @@
                             <td><a href="{{route('viewProduct',['id'=>$product->id])}}" class="badge badge-primary badge-sm">View product</a></td>
 
                             <td>
-                                <a href="{{route('deleteProduct',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
-                                <a href="" class="badge badge-warning badge-sm">Edituj</a>
-
+                                @if ($product->userID == Auth::user()->id)
+                                    <a href="{{route('deleteProduct',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
+                                    <a href="{{route('editView',['id'=>$product->id])}}" class="badge badge-warning badge-sm">Edituj</a>
+                                @endif
+                                
                             </td>
                         </tr>
                     

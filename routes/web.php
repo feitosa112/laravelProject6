@@ -42,5 +42,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
     Route::get('contact-us',[ContactController::class,'showContactForm'])->name('contactView');
     Route::post('send-msg',[ContactController::class,'sendMsg'])->name('sendMsg');
+
+    Route::get('edit-product/{id}',[ProductController::class,'showEditForm'])->name('editView');
+    Route::post('update-product/{id}',[ProductController::class,"updateProduct"])->name('update');
 });
 
