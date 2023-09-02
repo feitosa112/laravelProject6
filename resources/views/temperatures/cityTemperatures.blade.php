@@ -5,12 +5,12 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-2 ">
+        <div style="background-color: rgb(139, 133, 133)" class="col-2 ">
             <br>
             <a href="{{route('addCityView')}}" class="btn btn-primary float-left">Add city</a><br><br>
             <p><em>Klikom na dugme Add city mozete dodati grad za koji zelite da se prikauje temperatura</em></p>
         </div>
-        <div class="col-5 offset-2">
+        <div style="background-color: darkgrey" class="col-5 offset-2">
             <h5 class="display-4">Current temperatures</h5>
             @foreach ($temperatures as $temp)
             <div class="card">
@@ -24,7 +24,7 @@
                 
             @endforeach
         </div>
-        <div class="col-2">
+        <div style="background-color: rgb(139, 133, 133)" class="col-2 offset-1">
             <br><p><em>Trenutne temperature nisu stvarne,proizvoljno su upisane u cilju vjezbe</em></p>
         </div>
     </div>

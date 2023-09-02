@@ -35,7 +35,7 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/',[ProductController::class,"allProducts"])->name('shop');
 
-Route::middleware(['auth',AdminCheckMiddleware::class])->prefix('admin')->group(function(){
+Route::middleware('auth')->prefix('admin')->group(function(){
 
     //route za prikaz forme za dodavanje novog proizvoda
     Route::get('/add-product',[ProductController::class,'addProduct'])->name('addProduct');
