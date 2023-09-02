@@ -2,6 +2,7 @@
 
 @section('content')
 <h5 class="display-4">All products</h5>
+{{-- PRIKAZ TABELE SA PROIZVODIMA --}}
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
@@ -30,7 +31,7 @@
                             <td><a href="{{route('viewProduct',['id'=>$product->id])}}" class="badge badge-primary badge-sm">View product</a></td>
 
                             <td>
-                                @if ($product->userID == Auth::user()->id)
+                                @if (Auth::check() && $product->userID == Auth::user()->id)
                                     <a href="{{route('deleteProduct',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
                                     <a href="{{route('editView',['id'=>$product->id])}}" class="badge badge-warning badge-sm">Edituj</a>
                                 @endif

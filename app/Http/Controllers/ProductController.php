@@ -9,15 +9,18 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    //funkcija za prikaz svih proizvoda na welcome stranici
     public function allProducts(){
         $allProducts = ProductModel::all();
         return view('/welcome',compact('allProducts'));
     }
 
+    //funkcija za prikaz forme za dodavanje novog proizvoda 
     public function addProduct(){
         return view('products.addView');
     }
 
+    //funkcija za unos novog proizvoda preko forme
     public function addNewProduct(Request $request){
         $request->validate([
             'name'=>'required|string',
@@ -40,11 +43,13 @@ class ProductController extends Controller
         return redirect(route('shop'))->with('addProduct','You have successfully add product!');
     }
 
+    //funkcija za prikaz odredjenog proizvoda na osnovu id broja
     public function viewProduct($id){
         $product = ProductModel::find($id);
         return view('products.singleProduct',compact('product'));
     }
 
+    //funkcija za brisanje odredjenog proizvoda
     public function deleteProduct($id){
         $product = ProductModel::find($id);
         if($product == null){
@@ -55,12 +60,14 @@ class ProductController extends Controller
         return redirect()->back()->with('deleteProduct','Product deleted!!');
     }
 
+    //funkcija za prikaz forme za editovanje proizvoda
     public function showEditForm($id){
         $product = ProductModel::find($id);
         return view('products.edit-view',compact('product'));
 
     }
 
+    //funkcija za izvrsavanje updatea proizvoda na osnovu forme
     public function updateProduct(Request $request,$id){
         $name = $request->name;
         $price = $request->price;

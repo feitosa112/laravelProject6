@@ -1,3 +1,5 @@
+{{-- PORUKE KOJE SE ISPISUJU NAKON ODREDJENIH AKCIJA I KOJE TRAJU DO PRVOG OSVJEZENJA STRANICE,SADRZANE U with() --}}
+
 @if ($message = Session::get('addProduct'))
 <div class="col-4 offset-8">
     <div class="alert alert-success" role="alert">
