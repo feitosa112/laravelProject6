@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AdminCheckMiddleware;
+use App\Models\CityModel;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,5 +65,24 @@ Route::middleware(['auth',AdminCheckMiddleware::class])->prefix('admin')->group(
 
     //route za izvrsavanje updatea proizvoda
     Route::post('update-product/{id}',[ProductController::class,"updateProduct"])->name('update');
+
+
+    //route za prikaz temperatura u gradovima
+    Route::get('/temperatures',[CityController::class,'showTemperatures'])->name('temperaturesView');
+
+    //route za prikaz forme za dodavanje novog grada
+    Route::get('/add-city-view',[CityController::class,'addCityView'])->name('addCityView');
+    //route za dodavanje unosa iz forme u bazu
+    Route::post('/add-city',[CityController::class,'addCity'])->name('addCity');
+
+    //route za brisanje grada na osnovu id broja
+    Route::get('/delete-city/{id}',[CityController::class,'deleteCity'])->name('deleteCity');
+
+    //route za prikaz forme za editovanje podataka o gradu na osnovu id broja
+    Route::get('/edit-view/{id}',[CityController::class,'editView'])->name('editCity');
+
+    //route za updateovanje podataka u bazi vezanih za grad i temperaturu
+    Route::post('/update-city/{id}',[CityController::class,'updateCity'])->name('updateCity');
+
 });
 

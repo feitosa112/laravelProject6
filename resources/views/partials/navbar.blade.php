@@ -9,9 +9,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('addProduct')}}">Add product</a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('temperaturesView')}}">Current temperatures</a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{route('contactView')}}">Contact us</a>
-          </li>
+        </li>
       </ul>
       
       <ul class="navbar-nav ms-auto">
