@@ -36,5 +36,5 @@ class UserWeatherSeeder extends Seeder
         ]);
 
         $this->command->getOutput()
-->info('Uspjesno ste unijeli novi grad'.''.$city.''.'koji se nalazi u drzavi'.''.$country.''.'sa temperaturom od'.''.$temperature.''.'stepeni celzijusa');    }
+->info('Uspjesno ste unijeli novi grad'.' '.$city.' '.'koji se nalazi u drzavi'.' '.$country.' '.'sa temperaturom od'.' '.$temperature.' '.'stepeni celzijusa');    }
 }
