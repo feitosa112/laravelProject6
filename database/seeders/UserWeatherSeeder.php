@@ -28,6 +28,12 @@ class UserWeatherSeeder extends Seeder
         if($country == null){
             $this->command->getOutput()->error('Niste unijeli naziv drzave!'); 
         }
+        $city1 = CityModel::where(['city'=>$city])->first();
+        if($city1 != null){
+            $this->command->getOutput()->error('Ovaj grad vec postoji!');
+            return; 
+
+        }
 
         CityModel::create([
             'city'=>$city,

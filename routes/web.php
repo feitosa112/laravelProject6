@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AdminCheckMiddleware;
+use App\Models\CityForecastModel;
 use App\Models\CityModel;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +85,12 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
     //route za updateovanje podataka u bazi vezanih za grad i temperaturu
     Route::post('/update-city/{id}',[CityController::class,'updateCity'])->name('updateCity');
+
+    //Route za prikaz prognoze za odredjini grad,za sledecih pet dana
+    Route::get('/forecast/{id}',[ForecastController::class,'index'])->name('singelCity');
+
+    //route za prikaz svih gradova napravljenih preko seeder fakera
+    Route::get('/all-cities',[ForecastController::class,'allCities'])->name('allCities');
 
 });
 

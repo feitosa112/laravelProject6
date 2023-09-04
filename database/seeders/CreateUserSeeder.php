@@ -18,16 +18,19 @@ class CreateUserSeeder extends Seeder
         $name = $this->command->getOutput()->ask('Unesite ime korisnika.');
         if($name == null){
             $this->command->getOutput()->error('Niste unijeli ime korisnika');
+            return;
         }
 
         $email = $this->command->getOutput()->ask('Unesite email.');
         if($email == null){
             $this->command->getOutput()->error('Niste unijeli email');
+            return;
         }
 
         $password = $this->command->getOutput()->ask('Unesite password.');
         if($password == null){
             $this->command->getOutput()->error('Niste unijeli password');
+            return;
         }
 
         $user = User::where(['email'=>$email])->first();
