@@ -4,10 +4,6 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProductController;
-use App\Http\Middleware\AdminCheckMiddleware;
-use App\Models\CityForecastModel;
-use App\Models\CityModel;
-use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +53,7 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     //route za formu za slanje poruke
     Route::get('contact-us',[ContactController::class,'showContactForm'])->name('contactView');
 
-    //route za izvrsavanje slanja poruke 
+    //route za izvrsavanje slanja poruke
     Route::post('send-msg',[ContactController::class,'sendMsg'])->name('sendMsg');
 
     //-------------------------------------------------------------------------------------
