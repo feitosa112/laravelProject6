@@ -83,7 +83,7 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::post('/update-city/{id}',[CityController::class,'updateCity'])->name('updateCity');
 
     //Route za prikaz prognoze za odredjini grad,za sledecih pet dana
-    Route::get('/forecast/{id}',[ForecastController::class,'index'])->name('singelCity');
+    Route::get('/forecast/{city:name}',[ForecastController::class,'index'])->name('singleCity');
 
     //route za prikaz svih gradova napravljenih preko seeder fakera
     Route::get('/all-cities',[ForecastController::class,'allCities'])->name('allCities');

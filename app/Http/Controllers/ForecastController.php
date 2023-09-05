@@ -15,12 +15,12 @@ class ForecastController extends Controller
         return view('cities', compact('cityfor'));
     }
 
-    public function index(Request $request, $id)
+    public function index(CityForecastModel $city)
     {
-        $temperature = ForecastsModel::where('city_id', $id)->get();
-        $city = CityForecastModel::find($id);
-        // $cities = ForecastsModel::with(['city'=>function($query){$query->select('id','name');}])->where('city_id',$id)->get();
-        return view('forecasts', compact('temperature', 'city'));
+        $prognoze = ForecastsModel::where(['city_id' => $city->id])->get();
+        
+        
+        return view('forecasts', compact('prognoze'));
     }
 
 
