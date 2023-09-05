@@ -10,8 +10,8 @@ class ForecastController extends Controller
 {
 
     public function allCities(){
-        $cities = CityForecastModel::all();
-        return view('cities',compact('cities'));
+        $cityfor = CityForecastModel::all();
+        return view('cities',compact('cityfor'));
     }
 
     public function index(Request $request,$id){

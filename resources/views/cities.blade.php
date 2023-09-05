@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ($cities as $city)
+@foreach ($cityfor as $for)
 
-    <a href="{{route('singelCity',['id'=>$city->id])}}" class="btn btn-danger mb-2">{{$city->name}}</a><br>
+    <a href="{{route('singelCity',['id'=>$for->id])}}" class="btn btn-danger mb-2">{{$for->name}}</a><br>
 
 @endforeach
     
