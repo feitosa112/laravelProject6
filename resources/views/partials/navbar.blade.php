@@ -21,6 +21,8 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('contactView')}}">Contact us</a>
         </li>
+
+        
       </ul>
       
       <ul class="navbar-nav ms-auto">

@@ -4,6 +4,8 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProductController;
+use App\Models\ForecastsModel;
+use Database\Seeders\ForecastsSeeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -83,10 +85,12 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::post('/update-city/{id}',[CityController::class,'updateCity'])->name('updateCity');
 
     //Route za prikaz prognoze za odredjini grad,za sledecih pet dana
-    Route::get('/forecast/{city:name}',[ForecastController::class,'index'])->name('singleCity');
+    // Route::get('/forecast/{city:name}',[ForecastController::class,'index'])->name('singleCity');
 
     //route za prikaz svih gradova napravljenih preko seeder fakera
-    Route::get('/all-cities',[ForecastController::class,'allCities'])->name('allCities');
+    Route::get('/all-cities',[ForecastController::class,'index'])->name('allCities');
+
+    Route::post('/insert-temp',[ForecastController::class,'insert'])->name('insertTemp');
 
 });
 

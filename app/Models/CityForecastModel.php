@@ -12,5 +12,11 @@ class CityForecastModel extends Model
     protected $fillable = [
         "name",
     ];
+
+    public function forecast(){
+        return $this->hasMany(ForecastsModel::class,"city_id","id");
+    }
+
+    
     use HasFactory;
 }
