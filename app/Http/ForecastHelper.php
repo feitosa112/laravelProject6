@@ -18,5 +18,16 @@ class ForecastHelper {
         }
         return $boja;
     }
+
+
+    public function weatherType($weatherType){
+        if($weatherType == 'synny'){
+            $icons = '<i class="fa-solid fa-sun"></i>';
+        }elseif($weatherType == "rainy"){
+            $icons = '<i class="fa-solid fa-cloud-rain"></i>';
+        }elseif ($weatherType == "snowy"){
+            $icons = '<i class="fa-regular fa-snowflake"></i>';
+        }
+    }
 }
 ?>

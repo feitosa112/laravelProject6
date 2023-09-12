@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layout')
 @section('content')
 
 
@@ -19,7 +19,7 @@
             @endif
             <form action="{{route('insertTemp')}}" method="POST">
                 @csrf
-                <select name="city_id" class="form-control">
+                <select name="city_id" class="form-select">
                     @foreach (\App\Models\CityForecastModel::all() as $city)
                         <option value="{{$city->id}}">{{$city->name}}</option>
                     @endforeach
@@ -35,17 +35,19 @@
             <div class="col-4">
                 <div class="card m-1">
                     <div class="card-header">
-                        <a href="" class="badge badge-danger">{{$city->name}}</a>
+                        <a style="color: black" href="" class="badge badge-danger">{{$city->name}}</a>
                     </div>
                     <div class="card-body">
-                    <ul>
+                    <ul class="list-group">
                        @foreach ($city->forecast as $forecast)
                            @if ($forecast->city_id == $city->id)
                            @php
-                               $boja = \App\Http\ForecastHelper::colorByTemperature($forecast->temperature)
+                               $boja = \App\Http\ForecastHelper::colorByTemperature($forecast->temperature);
+
+                               $icons = \App\Http\ForecastHelper::weatherType($forecast->weatherType)
                            @endphp
                             <li>
-                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C</p>
+                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--{{$icons}}</i></p>
                             </li>                            
                            @endif
                        @endforeach
