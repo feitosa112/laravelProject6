@@ -1,4 +1,8 @@
 @extends('admin.layout')
+@section('title')
+Forecast
+    
+@endsection
 @section('content')
 
 
@@ -19,7 +23,7 @@
             @endif
             <form action="{{route('insertTemp')}}" method="POST">
                 @csrf
-                <select name="city_id" class="form-select">
+                <select name="city_id" class="form-control">
                     @foreach (\App\Models\CityForecastModel::all() as $city)
                         <option value="{{$city->id}}">{{$city->name}}</option>
                     @endforeach
@@ -47,7 +51,7 @@
                                $icons = \App\Http\ForecastHelper::weatherType($forecast->weatherType)
                            @endphp
                             <li>
-                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--<i class="fa-regular {{$icons}}"></i></p>
+                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--<i class="fa-solid {{$icons}}"></i></p>
                             </li>                            
                            @endif
                        @endforeach

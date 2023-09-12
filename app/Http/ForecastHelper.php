@@ -19,15 +19,16 @@ class ForecastHelper {
         return $boja;
     }
 
+    const WEATHER_ICONS = [
+        'rainy' => 'fa-cloud-rain',
+        'snowy' => 'fa-snowflake',
+        'sunny' => 'fa-sun',
+        'cloudy' => 'fa-cloud'
+    ];
 
-    public function weatherType($weatherType){
-        if($weatherType == 'sunny'){
-            $icons = ' fa-sun';
-        }elseif($weatherType == "rainy"){
-            $icons = 'fa-cloud-rain';
-        }elseif ($weatherType == "snowy"){
-            $icons = 'fa-snowflake';
-        }
+    public function weatherType($type){
+       
+        $icons = self::WEATHER_ICONS[$type];
         return $icons;
     }
 }

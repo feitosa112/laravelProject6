@@ -21,14 +21,25 @@ class ForecastsSeeder extends Seeder
        
         foreach( $cities as $city ){
             for ($i = 0; $i < 5 ; $i++) {
-                $weatherType = ForecastsModel::WEATHERS[rand(0,2)];
+                $weatherType = ForecastsModel::WEATHERS[rand(0,3)];
                 $probability = null;
-                if($weatherType == "rainy" || $weatherType == "snowy"){
+                if($weatherType == "rainy" || $weatherType == "snowy" || $weatherType == "cloudy"){
                     $probability = rand(1,100);
                 }
+
+                if($weatherType == 'rainy'){
+                    $temperature = rand(-10,20);
+                }elseif($weatherType == 'cloudy'){
+                    $temperature = rand(0,15);
+                }elseif($weatherType == 'snowy'){
+                    $temperature  = rand(-20,1);
+                }else {
+                    $temperature = rand(15,30);
+                }
+                
                 ForecastsModel::create([
                     'city_id' => $city->id,
-                    'temperature' => rand(15,30),
+                    'temperature' => $temperature,
                     'date' => Carbon::now()->addDays(rand(1,30)),
                     "weatherType"=>$weatherType,
                     "probability"=>$probability
