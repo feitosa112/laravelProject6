@@ -20,22 +20,36 @@ class ForecastsSeeder extends Seeder
         $cities = CityForecastModel::all();
        
         foreach( $cities as $city ){
+           
             for ($i = 0; $i < 5 ; $i++) {
                 $weatherType = ForecastsModel::WEATHERS[rand(0,3)];
                 $probability = null;
                 if($weatherType == "rainy" || $weatherType == "snowy" || $weatherType == "cloudy"){
                     $probability = rand(1,100);
                 }
-
-                if($weatherType == 'rainy'){
-                    $temperature = rand(-10,20);
-                }elseif($weatherType == 'cloudy'){
-                    $temperature = rand(0,15);
-                }elseif($weatherType == 'snowy'){
-                    $temperature  = rand(-20,1);
-                }else {
-                    $temperature = rand(15,30);
+                $prevTemp = null;
+                if($prevTemp !== null){
+                    $minTemp = $prevTemp-5;
+                    $maxTemp = $prevTemp+5;
+                    $temperature = rand($minTemp,$maxTemp);
+                }else{
+                    switch($weatherType){
+                        case 'rainy':
+                            $temperature = rand(-10,20);
+                            break;
+                        case 'cloudy':
+                            $temperature = rand(0,15);
+                            break;
+                        case 'snowy':
+                            $temperature  = rand(-20,1);
+                            break;
+                        case 'sunny':
+                            $temperature = rand(15,30);
+                            break;
+                    }
                 }
+                
+                
                 
                 ForecastsModel::create([
                     'city_id' => $city->id,
@@ -44,6 +58,7 @@ class ForecastsSeeder extends Seeder
                     "weatherType"=>$weatherType,
                     "probability"=>$probability
                 ]);
+                $prevTemp = $temperature;
                 $this->command->getOutput()->info("Uspjesno ste dodali temperature za gradove");        
             }
         }
