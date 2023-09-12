@@ -38,16 +38,18 @@
                         <a href="" class="badge badge-danger">{{$city->name}}</a>
                     </div>
                     <div class="card-body">
+                    <ul>
                        @foreach ($city->forecast as $forecast)
                            @if ($forecast->city_id == $city->id)
-                           <ul>
+                           @php
+                               $boja = \App\Http\ForecastHelper::colorByTemperature($forecast->temperature)
+                           @endphp
                             <li>
-                                <p>{{$forecast->date}} {{$forecast->temperature}}&deg;C</p>
-                            </li>
-                           </ul>
-                               
+                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C</p>
+                            </li>                            
                            @endif
                        @endforeach
+                    </ul>
                     </div>
                 </div>
             </div>    
