@@ -21,13 +21,14 @@ class ForecastHelper {
 
 
     public function weatherType($weatherType){
-        if($weatherType == 'synny'){
-            $icons = '<i class="fa-solid fa-sun"></i>';
+        if($weatherType == 'sunny'){
+            $icons = ' fa-sun';
         }elseif($weatherType == "rainy"){
-            $icons = '<i class="fa-solid fa-cloud-rain"></i>';
+            $icons = 'fa-cloud-rain';
         }elseif ($weatherType == "snowy"){
-            $icons = '<i class="fa-regular fa-snowflake"></i>';
+            $icons = 'fa-snowflake';
         }
+        return $icons;
     }
 }
 ?>

@@ -47,7 +47,7 @@
                                $icons = \App\Http\ForecastHelper::weatherType($forecast->weatherType)
                            @endphp
                             <li>
-                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--{{$icons}}</i></p>
+                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--<i class="fa-regular {{$icons}}"></i></p>
                             </li>                            
                            @endif
                        @endforeach
