@@ -84,13 +84,18 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     //route za updateovanje podataka u bazi vezanih za grad i temperaturu
     Route::post('/update-city/{id}',[CityController::class,'updateCity'])->name('updateCity');
 
-    //Route za prikaz prognoze za odredjini grad,za sledecih pet dana
-    // Route::get('/forecast/{city:name}',[ForecastController::class,'index'])->name('singleCity');
+    //Route za search
+    Route::get('/forecast/search',[ForecastController::class,"search"])->name('search');
+
+    // Route za prikaz prognoze za odredjini grad,za sledecih pet dana
+    Route::get('/forecast/{city:id}',[ForecastController::class,'singleCity'])->name('singleCity');
 
     //route za prikaz svih gradova napravljenih preko seeder fakera
     Route::get('/all-cities',[ForecastController::class,'index'])->name('allCities');
 
     Route::post('/insert-temp',[ForecastController::class,'insert'])->name('insertTemp');
+
+    
 
 });
 

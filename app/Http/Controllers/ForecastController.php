@@ -46,5 +46,18 @@ class ForecastController extends Controller
 
    }
 
+   public function search(Request $request){
+    $cityName = $request->get('city');
+
+    $cities = CityForecastModel::where('name','LIKE', "%$cityName%")->get();
+    
+    return view('searchResults',compact('cities'));
+   }
+
+   public function singleCity(CityForecastModel $city){
+    
+    return view('singleCity',compact('city'));
+   }
+
 
 }
