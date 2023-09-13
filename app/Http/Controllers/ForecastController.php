@@ -49,9 +49,13 @@ class ForecastController extends Controller
    public function search(Request $request){
     $cityName = $request->get('city');
 
-    $cities = CityForecastModel::where('name','LIKE', "%$cityName%")->get();
+    $cities = CityForecastModel::with('toDay')->where('name','LIKE', "%$cityName%")->get();
     
+    if(count($cities)==0){
+        return redirect()->back()->with('searchNull','We currently have no results for this search');
+    }else{
     return view('searchResults',compact('cities'));
+    }
    }
 
    public function singleCity(CityForecastModel $city){

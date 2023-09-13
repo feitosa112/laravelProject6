@@ -4,6 +4,8 @@ Forecast
     
 @endsection
 @include('partials.navbar')
+@include('flash-message')
+
 @section('content')
 
 
