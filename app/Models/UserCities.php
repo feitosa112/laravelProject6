@@ -14,4 +14,9 @@ class UserCities extends Model
     ];
 
     use HasFactory;
+
+    public function favourite()
+    {
+        return $this->hasOne(CityForecastModel::class, 'id','city_id');
+    }
 }

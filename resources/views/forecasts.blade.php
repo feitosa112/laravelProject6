@@ -20,6 +20,12 @@ Forecast
                 <input type="text" name="city" placeholder="search..." class="form-control"><br>
                 <button class="btn btn-success btn-sm">Search</button>
             </form>
+            <h5>Your favoutrite</h5>
+            
+            @foreach ($userFav1 as $userFav)
+            <p><small>{{$userFav->favourite->name}}</small></p>
+                
+            @endforeach
         </div>
         
         <div class="col-3 offset-1">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CityForecastModel;
 use App\Models\ForecastsModel;
+use App\Models\UserCities;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,18 @@ class ForecastController extends Controller
         return view ('cities', compact('cityfor'));
     }
 
-    public function index(CityForecastModel $city)
+    public function index(CityForecastModel $city,UserCities $favourite)
     {
         // $prognoze = ForecastsModel::where(['city_id' => $city->id])->get();
         $userFavorites = Auth::user()->cityFavorites;
         $userFavorites = $userFavorites->pluck('city_id')->toArray();
+
+        $userFav1 = UserCities::where([
+            'user_id' => Auth::user()->id
+        ])->get();
         
-        return view('forecasts',compact('city','userFavorites'));
+        
+        return view('forecasts',compact('city','userFavorites','userFav1'));
     }
 
    

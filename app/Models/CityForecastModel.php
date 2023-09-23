@@ -25,5 +25,7 @@ class CityForecastModel extends Model
     }
 
     
+
+    
     use HasFactory;
 }
