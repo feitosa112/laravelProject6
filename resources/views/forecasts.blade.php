@@ -45,10 +45,19 @@ Forecast
     </div>
     
     <div class="row">
+        
         @foreach (\App\Models\CityForecastModel::all() as $city)
+        
             <div class="col-4">
                 <div class="card m-1">
                     <div class="card-header">
+                        @if (in_array($city->id,$userFavorites))
+                            <a href="{{route('city.deleteFav',['city'=>$city->id])}}"><i class="fa-solid fa-trash"></i></a>
+
+                          @else
+                            <a href="{{route('city.favourite',['city'=>$city->id])}}"><i class="fa-regular fa-heart"></i></a>
+
+                        @endif
                         <a style="color: black" href="{{route('singleCity',['city'=>$city->id]) }}" class="badge badge-danger">{{$city->name}}</a>
                     </div>
                     <div class="card-body">

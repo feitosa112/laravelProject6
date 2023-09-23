@@ -6,6 +6,7 @@ use App\Models\CityForecastModel;
 use App\Models\ForecastsModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForecastController extends Controller
 {
@@ -19,10 +20,13 @@ class ForecastController extends Controller
     public function index(CityForecastModel $city)
     {
         // $prognoze = ForecastsModel::where(['city_id' => $city->id])->get();
+        $userFavorites = Auth::user()->cityFavorites;
+        $userFavorites = $userFavorites->pluck('city_id')->toArray();
         
-        
-        return view('forecasts',compact('city'));
+        return view('forecasts',compact('city','userFavorites'));
     }
+
+   
 
    public function insert(Request $request){
         $request->validate([
@@ -59,6 +63,7 @@ class ForecastController extends Controller
    }
 
    public function singleCity(CityForecastModel $city){
+        
     
     return view('singleCity',compact('city'));
    }

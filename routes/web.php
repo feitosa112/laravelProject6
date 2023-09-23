@@ -4,6 +4,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserCitiesController;
 use App\Models\ForecastsModel;
 use Database\Seeders\ForecastsSeeder;
 use Illuminate\Support\Facades\Auth;
@@ -94,6 +95,15 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::get('/all-cities',[ForecastController::class,'index'])->name('allCities');
 
     Route::post('/insert-temp',[ForecastController::class,'insert'])->name('insertTemp');
+
+    //UserCities favorurite
+    Route::get('/user-cities/favourite/{city}',[UserCitiesController::class,'favourite'])->name('city.favourite');
+    
+    //Delete favourite
+    Route::get('/user-cities/deleteFav/{city}',[UserCitiesController::class,'deleteFav'])->name('city.deleteFav');
+
+
+
 
     
 
