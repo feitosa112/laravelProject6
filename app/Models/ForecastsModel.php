@@ -14,7 +14,7 @@ class ForecastsModel extends Model
         "city_id", "temperature", "date", "name","weatherType","probability"
     ];
     use HasFactory;
-    const WEATHERS = ["rainy","sunny","snowy","cloudy"];
+    const WEATHERS = ["rainy","sunny","snowy","cloudy",];
 
     public function city()
     {

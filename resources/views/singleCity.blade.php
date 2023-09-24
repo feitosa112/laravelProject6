@@ -23,10 +23,20 @@ SingleCity
                         @php
                             $boja = \App\Http\ForecastHelper::colorByTemperature($city->today->temperature);
 
-                            $icons = \App\Http\ForecastHelper::weatherType($city->today->weatherType)
+                            // if ($city->today->weatherType != 'cloudy' || $city->today->weatherType != 'rainy' || $city->today->weatherType != 'snowy' || $city->today->weatherType != 'sunny')
+                            //     {
+                            //         $icons = 'Neki text';
+                            //     }
+                            //     else
+                            //     {
+                            //         $icons = \App\Http\ForecastHelper::weatherType($city->today->weatherType)
+
+                            //     }
+
+                            
                         @endphp
                          
-                             <p>{{$city->today->date}}--<span style="color:{{$boja}}">{{$city->today->temperature}}</span>&deg;C--<i class="fa-solid {{$icons}}"></i></p>
+                             <p>{{$city->today->date}}--<span style="color:{{$boja}}">{{$city->today->temperature}}</span>&deg;C--{{$city->today->weatherType}}</p>
                                                      
                         
                    

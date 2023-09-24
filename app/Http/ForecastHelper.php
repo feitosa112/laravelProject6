@@ -23,7 +23,8 @@ class ForecastHelper {
         'rainy' => 'fa-cloud-rain',
         'snowy' => 'fa-snowflake',
         'sunny' => 'fa-sun',
-        'cloudy' => 'fa-cloud'
+        'cloudy' => 'fa-cloud',
+        
     ];
 
     public function weatherType($type){

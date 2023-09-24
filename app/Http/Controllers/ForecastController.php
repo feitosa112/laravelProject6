@@ -7,6 +7,7 @@ use App\Models\ForecastsModel;
 use App\Models\UserCities;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class ForecastController extends Controller
@@ -62,8 +63,11 @@ class ForecastController extends Controller
     $cities = CityForecastModel::with('toDay')->where('name','LIKE', "%$cityName%")->get();
     
     if(count($cities)==0){
-        return redirect()->back()->with('searchNull','We currently have no results for this search');
+        $cityApi = Artisan::call('weather:currentWeather',['city' => $cityName]);
+        
+
     }else{
+        
     return view('searchResults',compact('cities'));
     }
    }

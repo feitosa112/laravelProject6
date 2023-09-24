@@ -39,11 +39,16 @@ Search results
                            @if ($forecast->city_id == $city->id)
                            @php
                                $boja = \App\Http\ForecastHelper::colorByTemperature($forecast->temperature);
+                            //    $icons = \App\Http\ForecastHelper::weatherType($forecast->weatherType);
 
-                               $icons = \App\Http\ForecastHelper::weatherType($forecast->weatherType)
+                            //    if ($icons === null)
+                            //     {
+                            //         $icons = 'Neki text';
+                            //     }
+                                
                            @endphp
                             <li>
-                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--<i class="fa-solid {{$icons}}"></i></p>
+                                <p>{{$forecast->date}}--<span style="color:{{$boja}}">{{$forecast->temperature}}</span>&deg;C--{{$forecast->weatherType}}</p>
                             </li>                            
                            @endif
                        @endforeach

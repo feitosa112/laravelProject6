@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CityForecastModel;
+use App\Models\ForecastsModel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Nette\Utils\Json;
@@ -59,11 +61,31 @@ class newCommand extends Command
         $jsonResponse = $response->json();
         
         if(isset($jsonResponse['error'])){
-            $this->output->error($jsonResponse['error']['message']);
+            die($jsonResponse['error']['message']);
         }else{
-            $jsonResponse = $response->body();
-            $jsonResponse = json_decode($jsonResponse);
-            dd($jsonResponse->location->name."-".$jsonResponse->location->country."-".$jsonResponse->location->localtime."--".$jsonResponse->current->condition->text);
+            CityForecastModel::create([
+                'name' => $jsonResponse['location']['name']
+            ]);
+            $nameId = $jsonResponse['location']['name'];
+            $cityFind = CityForecastModel::where('name',$nameId)->first();
+            ForecastsModel::create([
+                'city_id' => $cityFind['id'],
+                'temperature' => $jsonResponse['current']['temp_c'],
+                'date' => $jsonResponse['location']['localtime'],
+                'weatherType' => $jsonResponse['current']['condition']['text'],
+                'probability' => $jsonResponse['current']['humidity']
+            ]);
+            
+            
+            // $cityData = [
+            //     'name' => $jsonResponse['location']['name'],
+                
+            // ];
+            // dd($cityData);
+            // $jsonResponse = $response->body();
+            // $jsonResponse = json_decode($jsonResponse);
+            // dd($jsonResponse);
+            // dd($jsonResponse->location->name."-".$jsonResponse->location->country."-".$jsonResponse->location->localtime."--".$jsonResponse->current->condition->text);
         }
         
     }
