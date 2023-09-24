@@ -39,13 +39,22 @@ class newCommand extends Command
      */
     public function handle()
     {
-        $city = $this->argument('city');
         
-        $response =Http::get('http://api.weatherapi.com/v1/current.json',[
-            'key' => '0d637e4980354042815151746232309',
-            'q' => $city,
+        
+        // $response =Http::get('http://api.weatherapi.com/v1/current.json',[
+        //     'key' => '0d637e4980354042815151746232309',
+        //     'q' => $city,
+        //     'aqi' => 'no',
+        //     'lang' =>'sr',
+        
+        // ]);
+
+        $response = Http::get(env('WEATHER_API_URL').'v1/forecast.json',[
+            'key' => env("WEATHER_API_KEY"),
+            'q' => $this->argument('city'),
             'aqi' => 'no',
-            'lang' =>'sr'
+            'lang' => 'sr',
+            'days' => '2'
         ]);
         $jsonResponse = $response->json();
         
