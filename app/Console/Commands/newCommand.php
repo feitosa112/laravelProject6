@@ -13,7 +13,7 @@ class newCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'weather:currentWeather';
+    protected $signature = 'weather:currentWeather {city}';
 
     /**
      * The console command description.
@@ -39,11 +39,23 @@ class newCommand extends Command
      */
     public function handle()
     {
-        $url = 'http://api.weatherapi.com/v1/current.json?key=0d637e4980354042815151746232309&q=Celinac&aqi=no';
-        $response = Http::get($url);
-        $jsonResponse = $response->body();
-        $jsonResponse = json_decode($jsonResponse);
-        dd($jsonResponse->location->name."-".$jsonResponse->location->localtime);
+        $city = $this->argument('city');
+        
+        $response =Http::get('http://api.weatherapi.com/v1/current.json',[
+            'key' => '0d637e4980354042815151746232309',
+            'q' => $city,
+            'aqi' => 'no',
+            'lang' =>'sr'
+        ]);
+        $jsonResponse = $response->json();
+        
+        if(isset($jsonResponse['error'])){
+            $this->output->error($jsonResponse['error']['message']);
+        }else{
+            $jsonResponse = $response->body();
+            $jsonResponse = json_decode($jsonResponse);
+            dd($jsonResponse->location->name."-".$jsonResponse->location->country."-".$jsonResponse->location->localtime."--".$jsonResponse->current->condition->text);
+        }
         
     }
 }
