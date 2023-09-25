@@ -4,9 +4,10 @@ namespace App\Console\Commands;
 
 use App\Models\CityForecastModel;
 use App\Models\ForecastsModel;
+use App\Services\WeatherService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Nette\Utils\Json;
+
 
 class newCommand extends Command
 {
@@ -50,15 +51,10 @@ class newCommand extends Command
         //     'lang' =>'sr',
         
         // ]);
-
-        $response = Http::get(env('WEATHER_API_URL').'v1/forecast.json',[
-            'key' => env("WEATHER_API_KEY"),
-            'q' => $this->argument('city'),
-            'aqi' => 'no',
-            'lang' => 'sr',
-            'days' => '2'
-        ]);
-        $jsonResponse = $response->json();
+            $city = $this->argument('city');
+            $weatherService = new WeatherService();
+            $jsonResponse = $weatherService->getForecast($city);
+        
         
         if(isset($jsonResponse['error'])){
             die($jsonResponse['error']['message']);

@@ -19,6 +19,7 @@ class ForecastHelper {
         return $boja;
     }
 
+    
     const WEATHER_ICONS = [
         'rainy' => 'fa-cloud-rain',
         'snowy' => 'fa-snowflake',
@@ -28,6 +29,7 @@ class ForecastHelper {
     ];
 
     public function weatherType($type){
+       
        
         $icons = self::WEATHER_ICONS[$type];
         return $icons;

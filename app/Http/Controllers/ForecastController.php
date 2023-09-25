@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\CityForecastModel;
 use App\Models\ForecastsModel;
 use App\Models\UserCities;
+use App\Services\WeatherService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ForecastController extends Controller
 {
@@ -73,9 +75,12 @@ class ForecastController extends Controller
    }
 
    public function singleCity(CityForecastModel $city){
-        
+    $weatherService = new WeatherService();
+    $jsonresponse = $weatherService->getSunsetAndSunrise($city->name);
+    $sunrise = $jsonresponse['astronomy']['astro']['sunrise'];
+    $sunset = $jsonresponse['astronomy']['astro']['sunset'];
     
-    return view('singleCity',compact('city'));
+    return view('singleCity',compact('city','sunrise','sunset'));
    }
 
 

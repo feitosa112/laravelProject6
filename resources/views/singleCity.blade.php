@@ -18,6 +18,8 @@ SingleCity
                 
                 <h4>Today:</h4>
                 <ul class="list-group">
+                    <p>Sunrise:{{$sunrise}}</p>
+                    <p>Sunset:{{$sunset}}</p>
                     
                         
                         @php
