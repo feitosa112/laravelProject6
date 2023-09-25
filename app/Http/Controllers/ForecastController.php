@@ -75,6 +75,8 @@ class ForecastController extends Controller
    }
 
    public function singleCity(CityForecastModel $city){
+
+    
     $weatherService = new WeatherService();
     $jsonresponse = $weatherService->getSunsetAndSunrise($city->name);
     $sunrise = $jsonresponse['astronomy']['astro']['sunrise'];
