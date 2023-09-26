@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CurrencyModel;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Nette\Utils\Json;
@@ -14,7 +16,7 @@ class EuroDolarCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'exchange:rate {currency}';
+    protected $signature = 'exchange:rate';
 
     /**
      * The console command description.
@@ -42,19 +44,34 @@ class EuroDolarCommand extends Command
     {
         try
         {
-            $currency = $this->argument('currency');
+            $currency =['BAM','EUR','Usd'];
             $response = Http::get(env('CURRENCY_API_URL').'/latest?',[
                 'access_key'=> env('CURRENCY_API_KEY'),
                 'base' => 'EUR',
-                'symbols' => $currency
+                'symbols' => implode(',',$currency)
     
     
             ]);
             if($response->status() ==200){
                 $jsonResponse = $response->body();
                 $jsonResponse = json_decode($jsonResponse);
-                
-                dd($jsonResponse->rates);
+                foreach($currency as $cur){
+                    $todayCurrency = CurrencyModel::where('currency',$cur)->whereDate('created_at',Carbon::now())->first();
+                    if($todayCurrency === null){
+                        $uperCaseCur = strtoupper($cur);
+                        CurrencyModel::create([
+                            'currency' => $uperCaseCur ,
+                            'value' =>$jsonResponse->rates->$uperCaseCur
+                        ]);
+                        continue;
+                    }else{
+                        continue;
+                    }
+                    
+                    
+                }
+            //   dd($jsonResponse->rates);  
+            $this->info('Podaci su uspjesno unijeti u bazu');
             }else
             {
                 $this->error('Nije moguce dobiti informacije o kursu');
