@@ -5,7 +5,7 @@
 {{-- PRIKAZ TABELE SA PROIZVODIMA --}}
 <div class="container">
     <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-7 ">
 
             <table class="table table-dark">
                 <thead>
@@ -45,6 +45,31 @@
                   
                 </tbody>
               </table>
+        </div>
+
+        <div class="col-3 offset-1">
+            <a href="{{route('todaysExchangeRate')}}">Azuriraj kursnu listu da biste vidjeli danasnji kurs</a><br>
+            
+            
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">Currency</th>
+                        <th scope="col">ExchangeRate</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($todaysExchangeRate as $ex)
+                        <tr>
+                            <td>{{$ex->currency}}</td>
+                            <td>{{$ex->value}}</td>
+                        </tr>
+                        
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -44,7 +44,7 @@ class EuroDolarCommand extends Command
     {
         try
         {
-            $currency =['BAM','EUR','Usd'];
+            $currency =['BAM','EUR','CHF','AUD','USD','RSD','SEK'];
             $response = Http::get(env('CURRENCY_API_URL').'/latest?',[
                 'access_key'=> env('CURRENCY_API_KEY'),
                 'base' => 'EUR',
@@ -56,7 +56,7 @@ class EuroDolarCommand extends Command
                 $jsonResponse = $response->body();
                 $jsonResponse = json_decode($jsonResponse);
                 foreach($currency as $cur){
-                    $todayCurrency = CurrencyModel::where('currency',$cur)->whereDate('created_at',Carbon::now())->first();
+                    $todayCurrency = CurrencyModel::currencyForToday($cur);
                     if($todayCurrency === null){
                         $uperCaseCur = strtoupper($cur);
                         CurrencyModel::create([

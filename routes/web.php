@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserCitiesController;
@@ -102,6 +103,7 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     //Delete favourite
     Route::get('/user-cities/deleteFav/{city}',[UserCitiesController::class,'deleteFav'])->name('city.deleteFav');
 
+    Route::get('/todays-exchange-rate',[CurrencyController::class,'todaysExchangeRate'])->name('todaysExchangeRate');
 
 
 

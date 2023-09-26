@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CurrencyModel;
 use App\Models\ProductModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +15,10 @@ class ProductController extends Controller
     public function allProducts()
     {
         $allProducts = ProductModel::all();
-        return view('/welcome', compact('allProducts'));
+
+        $todaysExchangeRate = CurrencyModel::whereDate('created_at',Carbon::now())->get();
+
+        return view('/welcome', compact('allProducts','todaysExchangeRate'));
     }
 
     //funkcija za prikaz forme za dodavanje novog proizvoda
