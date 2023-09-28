@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCityRequest;
+use App\Http\Requests\UpdateCityRequest;
 use App\Models\CityModel;
+use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
+    private $cityRepo;
+
+    public function __construct() {
+        $this->cityRepo = new CityRepository();
+    }
     //funkcija za prikaz svih gradova sa temperaturama
     public function showTemperatures()
     {
@@ -23,28 +31,21 @@ class CityController extends Controller
     }
 
     //funkcija za dodavanje novog unosa iz forme,novi grad
-    public function addCity(Request $request)
+    public function addCity(CreateCityRequest $request)
     {
-        $request->validate([
-            'city' => 'required|string|unique:city_temperatures',
-            'country' => 'required|string',
-            'temperature' => 'required|string',
-        ]);
-
-        CityModel::create([
-            'city' => $request->get('city'),
-            'country' => $request->get('country'),
-            'currentTemperatures' => $request->get('temperature'),
-
-        ]);
+        
+        $this->cityRepo->createCity($request);
 
         return redirect(route('temperaturesView'))->with('addCity', 'You have successfully added a new city!');
     }
 
+
+
+
     //funkcija za brisanje odredjenog grada na osnovu id broja
     public function deleteCity($id)
     {
-        $city = CityModel::find($id);
+        $city = $this->cityRepo->deleteCityRepo($id);
 
         if ($city == null) {
             echo "Ovaj product ne postoji";
@@ -55,6 +56,8 @@ class CityController extends Controller
         return redirect()->back()->with('deleteCity', 'City deleted!!');
     }
 
+
+
     //funkcija za prikaz forme za editovanje podaataka o gradu
     public function editView($id)
     {
@@ -63,22 +66,10 @@ class CityController extends Controller
     }
 
     //funkcija za unos podataka u bazu,iz forme za izmjenu podataka o gradu
-    public function updateCity(Request $request, $id)
+    public function updateCity(UpdateCityRequest $request, $id)
     {
-        $city = $request->city;
-        $country = $request->country;
-        $currentTemperatures = $request->temperature;
-        $id = $request->id;
-
-        // dd($request->all());
-        $request->validate([
-            'city' => 'required|string',
-            'country' => 'required|string',
-            'temperature' => 'required|string',
-        ]);
-
-
-        DB::update('UPDATE city_temperatures SET city= :city,country= :country,currentTemperatures= :currentTemperatures WHERE id= :id', ['id' => $id, 'city' => $city, 'country' => $country, 'currentTemperatures' => $currentTemperatures]);
+   
+        $this->cityRepo->updateCityRepo($request,$id);
         return redirect(route('temperaturesView'))->with('updateCity', 'You have successfully edited the city!');
 
     }
