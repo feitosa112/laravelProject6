@@ -19,7 +19,7 @@
             @endif
 
 
-            <form action="{{route('addCity')}}" method="POST">
+            <form action="{{route('city.add')}}" method="POST">
                 @csrf
                 <input type="text" name="city" placeholder="City" value="{{old('city')}}" class="form-control"><br>
                 <input type="text" name="country" placeholder="Country" value="{{old('country')}}" class="form-control"><br>

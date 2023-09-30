@@ -36,7 +36,7 @@ class CityController extends Controller
         
         $this->cityRepo->createCity($request);
 
-        return redirect(route('temperaturesView'))->with('addCity', 'You have successfully added a new city!');
+        return redirect(route('city.temperaturesView'))->with('addCity', 'You have successfully added a new city!');
     }
 
 
@@ -70,7 +70,7 @@ class CityController extends Controller
     {
    
         $this->cityRepo->updateCityRepo($request,$id);
-        return redirect(route('temperaturesView'))->with('updateCity', 'You have successfully edited the city!');
+        return redirect(route('city.temperaturesView'))->with('updateCity', 'You have successfully edited the city!');
 
     }
 }

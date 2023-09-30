@@ -15,7 +15,7 @@
             @endif
 
 
-            <form action="{{route('updateCity',['id'=>$city->id])}}" method="POST">
+            <form action="{{route('city.update',['id'=>$city->id])}}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{$city->id}}"><br>
                 <input type="text" class="form-control" name="city" value="{{$city->city}}"><br>

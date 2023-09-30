@@ -33,19 +33,19 @@ Route::controller(ProductController::class)->group(function(){
 Route::middleware('auth')->prefix('admin')->group(function(){
     
     //Route group za ProductController u midlewareu
-    Route::controller(ProductController::class)->prefix('/product')->group(function(){
+    Route::controller(ProductController::class)->name('product.')->prefix('/product')->group(function(){
 
         //route za prikaz forme za dodavanje novog proizvoda
-        Route::get('/add-product','addProduct')->name('addProduct');
+        Route::get('/add-product','addProduct')->name('addView');
 
         //route za izvrsavanje dodavanja novog proizvoda
         Route::post('/add','addNewProduct')->name('add');
 
         //route za prikaz odredjenog proizvoda na osnovu id broja
-        Route::get('/view/{id}','viewProduct')->name('viewProduct'); 
+        Route::get('/view/{id}','viewProduct')->name('view'); 
 
         //route za brisanje odredjenog proizvoda na osnovu id broja
-        Route::get('/delete/{id}','deleteProduct')->name('deleteProduct');
+        Route::get('/delete/{id}','deleteProduct')->name('delete');
 
         //route za formu za editovanje proizvoda
         Route::get('edit/{id}','showEditForm')->name('editView');
@@ -69,7 +69,7 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
 
     //Route group za CityController u midlewareu
-    Route::controller(CityController::class)->prefix('/city')->group(function(){
+    Route::controller(CityController::class)->name('city.')->prefix('/city')->group(function(){
 
         //route za prikaz temperatura u gradovima
         Route::get('/temperatures','showTemperatures')->name('temperaturesView');
@@ -78,16 +78,16 @@ Route::middleware('auth')->prefix('admin')->group(function(){
         Route::get('/add-view','addCityView')->name('addCityView');
 
         //route za dodavanje unosa iz forme u bazu
-        Route::post('/add','addCity')->name('addCity');
+        Route::post('/add','addCity')->name('add');
 
         //route za brisanje grada na osnovu id broja
-        Route::get('/delete/{id}','deleteCity')->name('deleteCity');
+        Route::get('/delete/{id}','deleteCity')->name('delete');
 
         //route za prikaz forme za editovanje podataka o gradu na osnovu id broja
-        Route::get('/edit-view/{id}','editView')->name('editCity');
+        Route::get('/edit-view/{id}','editView')->name('edit');
 
         //route za updateovanje podataka u bazi vezanih za grad i temperaturu
-        Route::post('/update/{id}','updateCity')->name('updateCity');
+        Route::post('/update/{id}','updateCity')->name('update');
     });
 
 
@@ -105,13 +105,13 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     });
 
     //Route group za CityController u midlewareu
-    Route::controller(UserCitiesController::class)->group(function(){
+    Route::controller(UserCitiesController::class)->name('city.')->group(function(){
 
         //UserCities favorurite
-        Route::get('/user-cities/favourite/{city}','favourite')->name('city.favourite');
+        Route::get('/user-cities/favourite/{city}','favourite')->name('favourite');
 
         //Delete favourite
-        Route::get('/user-cities/deleteFav/{city}','deleteFav')->name('city.deleteFav');
+        Route::get('/user-cities/deleteFav/{city}','deleteFav')->name('deleteFav');
     });
 
     //route za prikaz svih gradova napravljenih preko seeder fakera

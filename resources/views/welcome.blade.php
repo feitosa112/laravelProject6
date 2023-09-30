@@ -28,12 +28,12 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->amount}}</td>
-                            <td><a href="{{route('viewProduct',['id'=>$product->id])}}" class="badge badge-primary badge-sm">View product</a></td>
+                            <td><a href="{{route('product.view',['id'=>$product->id])}}" class="badge badge-primary badge-sm">View product</a></td>
 
                             <td>
                                 @if (Auth::check() && $product->userID == Auth::user()->id)
-                                    <a href="{{route('deleteProduct',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
-                                    <a href="{{route('editView',['id'=>$product->id])}}" class="badge badge-warning badge-sm">Edituj</a>
+                                    <a href="{{route('product.delete',['id'=>$product->id])}}" class="badge badge-danger badge-sm">Obrisi</a>
+                                    <a href="{{route('product.editView',['id'=>$product->id])}}" class="badge badge-warning badge-sm">Edituj</a>
                                 @endif
                                 
                             </td>

@@ -16,7 +16,7 @@
             @endforeach
             @endif
 
-            <form action="{{route('update',['id'=>$product->id])}}" method="POST">
+            <form action="{{route('product.update',['id'=>$product->id])}}" method="POST">
                 @csrf
 
                 <input type="hidden" value="{{$product->id}}" name="id"><br>

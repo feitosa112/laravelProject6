@@ -12,7 +12,7 @@
             @endif
                 
             
-            <form action="{{route('add')}}" method="POST">
+            <form action="{{route('product.add')}}" method="POST">
                 @csrf
                 <input type="text" name="name" value="{{old('name')}}" placeholder="Name" class="form-control"><br>
                 <input type="number" name="price" value="{{old('price')}}" placeholder="Price" class="form-control"><br>

@@ -7,11 +7,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('addProduct')}}">Add product</a>
+          <a class="nav-link" href="{{route('product.addView')}}">Add product</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="{{route('temperaturesView')}}">Current temperatures</a>
+            <a class="nav-link" href="{{route('city.temperaturesView')}}">Current temperatures</a>
         </li>
 
         <li class="nav-item">
